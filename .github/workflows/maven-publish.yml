@@ -6,13 +6,22 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Java CI with Gradle
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+  # env:
+  #   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  #   GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
+  #   GKE_CLUSTER: cluster-1    # TODO: update to cluster name
+  #   GKE_ZONE: us-central1-c   # TODO: update to cluster zone
+  #   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
+  #   REPOSITORY: samples # TODO: update to Artifact Registry docker repository
+  #   IMAGE: static-site  
 
 jobs:
   build:
@@ -34,7 +43,7 @@ jobs:
       #   run: ./mvnw --batch-mode clean package
 
       - name: Build Complete with Gradle
-        run: ./gradlew build          
+        run: ./gradlew build -x test
         
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
