@@ -30,11 +30,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build Complete with Maven
-        run: ./mvnw --batch-mode clean package
+      # - name: Build Complete with Maven
+      #   run: ./mvnw --batch-mode clean package
 
-      # - name: Build Complete with Gradle
-      #   run: ./gradlew build          
+      - name: Build Complete with Gradle
+        run: ./gradlew build          
         
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
